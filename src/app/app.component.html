@@ -1,0 +1,252 @@
+<div class="page-wrap">
+<div class="row align-items-center divHeader" [ngClass]="{'floatHeader': (innerWidth <= 540)}">
+  <div class="col-sm-12 col-md-3 ">
+    <img class="rounded float-left" src="assets/images/icons/logo_marvel.png" />
+  </div>
+  <div class="col-sm-12 col-md-5 ">
+    <div class="input-group mb-1">      
+        <input (keydown)="keyDownFunction($event)" type="text" placeholder="Search character..." aria-describedby="inputGroup-sizing-sm" class="form-control" placeholder="Search character"
+        [(ngModel)]="hero">
+        <div class="input-group-prepend">
+         <input class="input-group-text" type="image" src="assets/images/icons/search.png" (click)="SearchHeros()" />
+        </div>      
+    </div>
+  </div>
+  <div class="col">
+    <button type="text" class="float" *ngIf="innerWidth <= 750px" (click)="displayFavourites = true"  pButton icon="fa-external-link-square"
+      label="Favourites"></button>
+  </div>
+</div>
+
+<div class="row align-items-start" [ngClass]="{'headerSmall': (innerWidth <= 540)}">
+  <div class="col-sm-12 col-md-9">
+    <div class="row align-items-center" style="padding: 15pt">
+      <div class="col-sm-12 col-md-8 ">
+        <img src="assets/images/icons/characters.png" />
+        <label>Characters</label>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        
+      </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="diplayHeros">        
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6" *ngFor="let hero of listHeros | paginate: { id: 'divHeros',
+      itemsPerPage: 10,
+      currentPage: p,
+      totalItems: total }">
+        <div class="row justify-content-center  cardHero">
+          <div [ngClass]="{'cardSmall' : (innerWidth <= 720), 'cardDefault' : (innerWidth > 720)}">
+            <table>
+              <tr>
+                <td class="imageHero">
+                  <img src="{{hero.thumbnail.path.replace('http','https')}}.{{hero.thumbnail.extension}}" [ngClass]="{'imgSmall' : (innerWidth <= 540), 'imgDefault' : (innerWidth > 540)}">
+                </td>
+                <td style="vertical-align: top;">
+                  <table>
+                    <tr>
+                      <td style="padding-top: 23px; padding-left: 10px; max-height: 1px;">
+                        <p style="font-size: 16px; font-weight: bold">{{hero.name.toUpperCase()}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td [ngClass]="{'descriptionSmall': (innerWidth <= 540),'descriptionDefault': (innerWidth > 540)}">
+                        <p class="texto">{{hero.description.substring(0, 350)}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding-left: 10px;">
+                        <button class="btn btn-danger" (click)="SelectHero($event, hero)">VIEW MORE</button>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <td style="padding-left: 55px">
+                  <p class="text-left" style="font-size: 16px; font-weight: bold">Related comics</p>
+                </td>
+              </tr>
+              <tr>
+                <td [ngClass]="{'tdSmall' : (innerWidth <= 540), 'tdDefault' : (innerWidth > 540)}" style="padding-left: 55px">
+                  <p class="text-left texto">{{hero.comics.items[0] == null ? '': hero.comics.items[0].name }}</p>
+                </td>
+                <td [ngClass]="{'tdSmall' : (innerWidth <= 540), 'tdDefault' : (innerWidth > 540)}">
+                  <p class="text-left texto">{{hero.comics.items[1] == null ? '': hero.comics.items[1].name }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td [ngClass]="{'tdSmall' : (innerWidth <= 540), 'tdDefault' : (innerWidth > 540)}" style="padding-left: 55px">
+                  <p class="text-left texto">{{hero.comics.items[2] == null ? '': hero.comics.items[2].name }}</p>
+                </td>
+                <td [ngClass]="{'tdSmall' : (innerWidth <= 540), 'tdDefault' : (innerWidth > 540)}">
+                  <p class="text-left texto">{{hero.comics.items[3] == null ? '': hero.comics.items[3].name }}</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="row justify-content-center cardHeroBack">
+
+        </div>
+      </div>    
+      <br>      
+         
+    </div>   
+    <div class="row" align="center" *ngIf="diplayHeros">
+        <div class="col-sm-12">
+            <pagination-controls  id="divHeros"
+            class="my-pagination"
+            (pageChange)="p = $event"
+            maxSize="5"
+            directionLinks="true"
+            autoHide="true"
+            previousLabel=""
+            nextLabel=""
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page">
+            </pagination-controls>
+        </div>
+      </div>   
+    <div class="row justify-content-center" *ngIf="diplayComics">
+      <p-dataList [styleClass]="classDataList" [value]="listComics" [paginator]="true" [rows]="10">
+        <p-header>
+          <div class="row justify-content-start">
+            <div class="col-6">
+              <button type="text" class="goBack" pButton label="Go back" (click)="GoBack()"></button>              
+            </div>
+            <div class="col-12">
+              List of Comics
+            </div>
+          </div>
+        </p-header>
+        <ng-template let-comic pTemplate="item">
+          <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+            <div class="ui-g-12 ui-md-8 car-details">
+              <div class="ui-g">
+                <div class="ui-g-2 ui-sm-6">Name: </div>
+                <div class="ui-g-10 ui-sm-6">
+                  <b>{{comic.name}}</b>
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-1 search-icon">
+              <button type="button" class="btn btn-danger" (click)="SelectComic($event, comic)">VIEW MORE</button>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataList>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-3" id="divFavourites" *ngIf="innerWidth > 750px">
+    <div class="row align-items-center" style="padding: 15pt">
+      <div class="col-2">
+        <img src="assets/images/icons/favourites.png" />
+      </div>
+      <div class="col-10">
+        <label>My favourites</label>
+      </div>
+    </div>
+    <div class="row" *ngIf="(listFavourites == null || listFavourites.length <= 0) && (listHeros.length > 0)" align="center">
+      <div class="col-sm-12">
+          <button (click)="AddRandomFavourites()" class="btn-added-favourite">
+              Add three random favorites</button>
+      </div>
+    </div>
+    <div class="row align-items-center">      
+      <div class="col-sm-12 " *ngFor="let comic of listFavourites; let i = index">
+        <div class="row" style="padding-left: 30%">
+          <div style="padding-top: 5%">
+            <img src="{{comic.thumbnail.path.replace('http','https')}}.{{comic.thumbnail.extension}}" width="150" style="box-shadow: 5px 5px#afadad;">
+          </div>
+          <div style=" position: relative; left: -5%; top: -6%">
+            <input type="image" src="assets/images/icons/btn-delete.png" (click)="DeleteComic(i)" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-sm-12" align="center">
+            <p style="font-weight: bold">{{comic.title}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-dialog *ngIf="selectedComic" [contentStyle]="{'padding':'0', 'overflow-x':'hidden'}" [width]="800" [(visible)]="displayDialog" [showHeader]="false" [modal]="true">
+  <div style="padding:15px">
+      <div class="row no-gutters" align="right">
+          <div class="col-sm-12">
+              <input type="image" src="assets/images/icons/btn-close.png" (click)="CloseDialog()"  >
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-sm-12 col-md-6" align="center">
+              <img src="{{selectedComic.thumbnail.path.replace('http','https')}}.{{selectedComic.thumbnail.extension}}" style="width: 280px; height: 400px; box-shadow: 5px 5px#afadad;">
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="row">
+              <div class="col-sm-12">
+                  <h3 style="font-weight: bolder">{{selectedComic.title}}</h3>
+              </div>        
+            </div>
+            <div class="row">
+              <div class="col-sm-12" style="color:#6C6364">
+                  {{selectedComic.description}}
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>  
+  <br>
+  <div class="row no-gutters">
+    <div class="col-sm-12 col-md-6">
+        <button (click)="AddFavourites(selectedComic)" class="btn-add-favourite" *ngIf="!addedFavourites">
+          <span style="padding-right: 10px"><img src="assets/images/icons/btn-favourites-default.png"/></span>
+          ADD TO FAVOURITES</button>
+        <button (click)="AddFavourites(selectedComic)" class="btn-added-favourite" *ngIf="addedFavourites">
+          <span style="padding-right: 10px"><img src="assets/images/icons/btn-favourites-primary.png"/></span>
+          ADDED TO FAVOURITES</button>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <button class="btn-buy-favourite" style="width: 100%;">
+        <span style="padding-right: 10px"><img src="assets/images/icons/shopping-cart-primary.png"/></span>BUY FOR {{comicPrice | currency}}</button>
+    </div>
+  </div>  
+</p-dialog>
+
+
+<p-sidebar [(visible)]="displayFavourites" position="right">
+  <div class="row">
+    <div class="col">
+        <img src="assets/images/icons/favourites.png" />
+        <label style="padding-left: 15px">My favourites</label>
+    </div>    
+  </div>
+  <div class="row" *ngIf="(listFavourites == null || listFavourites.length <= 0) && (listHeros.length > 0)" align="center">
+    <div class="col-sm-12">
+          <button (click)="AddRandomFavourites()" class="btn-added-favourite">              
+              Add three random favorites
+          </button>
+    </div>
+  </div>
+  <br>
+  <div style="height: 100%; overflow: scroll">
+    <div class="row" *ngFor="let comic of listFavourites; let i = index">
+      <div class="card" align="center" style="width: 250px">
+        <div class="row justify-content-end">
+          <input type="image" src="assets/images/icons/btn-delete.png" (click)="DeleteComic(i)" />
+        </div>
+        <img src="{{comic.thumbnail.path.replace('http','https')}}.{{comic.thumbnail.extension}}" width="150" style="box-shadow: 5px 5px#afadad;">
+        <div class="card-body" >
+          <h5 class="card-title">{{comic.title}}</h5>          
+        </div>
+      </div>        
+    </div>
+  </div>
+</p-sidebar>
+<div class="my-container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>    
+</div>
+</div>

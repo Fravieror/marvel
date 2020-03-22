@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+body{
+    background-color: #F4F4F4;   
+}
+footer{
+    background-color: #2D2727;
+    color: white;
+    padding: 20px;    
+}
+.btn-danger{
+    background-color: #EC1D23 !important;
+    border-radius: 0 !important;
+}
+
+.classDataList{
+    color: black;
+    background-color: black;
+}

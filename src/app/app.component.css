@@ -1,0 +1,204 @@
+.card-header{
+    background-color: #2D2727;
+    color: white;
+    font-weight: bold;
+}
+.form-control{    
+    background-color: #eeeeee;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-seri ;
+}
+.btn-outline-secondary{
+    background-color: #eeeeee;     
+}
+label{
+    font-weight: bolder;
+    font-size: 20pt;    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-seri ;
+}
+p{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-seri ;
+}
+button{
+    background-color: rgba(255, 0, 0, 0.753);
+    color: white;
+    font-weight: bold;
+}
+button:hover{
+    background-color: rgba(255, 0, 0, 0.418) !important;
+}
+.card-body{
+    background-color: #EEEEEE;
+}
+.divFavourites{
+    background-color: #1d1c1c07 !important;    
+    height: 100%; 
+}
+.card{
+    background-color: #1d1c1c07 !important;
+    border: none;
+}
+
+
+/* NUEVOS COMPONENTES */
+.divHeader{    
+    padding: 6pt;     
+    background-color: #2D2727;
+    box-shadow: 4px 4px 4px 4px #afadad;    
+}
+
+#divFavourites{
+    background-color:#EBEBEB;    
+    height: 100%
+}
+.texto{
+    font-size: 11px;
+}
+.infoHero{
+    padding-left: 30pt; 
+}
+.imageHero{
+    padding-bottom: 20pt; 
+}
+.cardHero{
+    background-color: transparent;    
+    position: relative;
+    z-index : 1;
+}
+.cardHeroBack{
+    align-self: center;
+    background-color: white;
+    height: 90%;
+    width: 87%;
+    left: 12%;
+    position: relative;
+    top: -92%;   
+    z-index: 0;
+}
+.float{
+    display:scroll;
+    position:fixed;
+    border-radius: 0;
+    padding: 15px;
+    bottom: 40px;
+    right:15px;
+    z-index: 100;
+  }
+.imgDefault{
+    width: 200px; height: 200px; border-radius: 190px; box-shadow: 5px 2px #afadad;
+}
+.imgSmall{
+    width: 130px; height: 130px; border-radius: 190px; box-shadow: 5px 2px #afadad;
+}
+.descriptionDefault{
+    padding-left: 10px; height: 160px; width: 210px;
+}
+.descriptionSmall{
+    padding-left: 10px; height: 160px; width: 150px;
+}
+.cardSmall{
+    width: 450px;
+    height: 520px; 
+    padding-left: 20px;
+}
+.cardDefault{
+    width: 450px;
+    height: 450px; 
+    padding-left: 20px;
+}
+.tdDefault{
+    padding-left: 55px; width: 170px;
+}
+.tdSmall{
+    width: 100px;
+}
+.floatHeader{
+    display:scroll;
+    position:fixed;
+    top: 0;
+    left: 0;    
+    z-index: 100;
+}
+.headerSmall{
+    padding-top: 120px;
+}
+.goBack{
+    border-radius: 0;
+    padding: 15px;
+    display:scroll;
+    position:fixed;
+    bottom: 40px;
+    left:15px;
+    z-index: 100;
+}
+.goBack:hover{
+    background: #3D3332 !important;
+}
+
+.my-pagination /deep/ .ngx-pagination a{
+    background: #FFFFFF;
+    margin: 5px;    
+    box-shadow: 1px 1px 1px 1px #afadad;    
+    border-color:#F4F4F4;
+    border-width: 10px;
+    height: 40px;    
+    width: 40px;
+    color:#C4C2C3;
+    padding-top:8px;
+    font-weight: bold;
+}
+.my-pagination /deep/ .ngx-pagination .current {
+    padding-top:8px;
+    margin: 5px;
+    background: #FCFCFC;
+    border-color: #FCFCFC;
+    color:black; 
+    height: 40px;    
+    width: 40px;
+    font-weight: bold;
+}
+.btn-added-favourite{    
+    padding: 10px;
+    background-color: #322827; 
+    border-color: #322827;
+    color: #EC1D23;
+    width: 100%;
+}
+.btn-added-favourite:hover{
+    background-color: #322827 !important; 
+    border-color: #322827 !important;
+    color: #EC1D23 !important;
+    width: 100% !important;
+    cursor: pointer;
+    border-color: #EC1D23 !important;
+    border-width: 2px;
+}
+.btn-add-favourite{    
+    padding: 10px;
+    background-color: #F0F0F0; 
+    border-color: #F0F0F0;
+    color: #3D3332;
+    width: 100%;
+}
+.btn-add-favourite:hover{
+    background-color: #F0F0F0 !important; 
+    border-color: #F0F0F0 !important;
+    color: #3D3332 !important;
+    width: 100% !important;
+    cursor: pointer;
+    border-color: #EC1D23 !important;
+    border-width: 2px;
+}
+.btn-buy-favourite{
+    padding: 10px;
+    background-color: #DCDCDC;
+    color: #EC1D23;
+    width: 100%;
+}
+.btn-buy-favourite:hover{
+    background-color: #DCDCDC !important;
+    color: #EC1D23 !important;
+    width: 100% !important;
+    cursor: pointer;
+    border-color: #EC1D23 !important;
+    border-width: 2px;
+}
